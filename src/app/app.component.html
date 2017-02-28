@@ -1,3 +1,19 @@
-<h1>
-  {{title}}
-</h1>
+<app-nav-bar></app-nav-bar>
+
+<div class="app-container">
+  <md-card *ngIf="!authService.authenticated()">
+    <md-card-title>Hola, invitado.</md-card-title>
+    <md-card-subtitle>
+      Por favor <a (click)="authService.signIn()">identificate</a> para utilizar tu lista de tareas.
+    </md-card-subtitle>
+  </md-card>
+
+
+
+      <app-task-list *ngIf="authService.authenticated()"
+    (startAjaxRequest)="slimLoading.start()"
+    (completeAjaxRequest)="slimLoading.complete()">
+  </app-task-list>
+</div>
+
+<ng2-slim-loading-bar [color]="'gold'" [height]="'4px'"></ng2-slim-loading-bar>
